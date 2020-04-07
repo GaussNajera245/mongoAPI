@@ -6,7 +6,7 @@ const url = 'mongodb+srv://onceonceonce11:onceonceonce11@nemo-rkcm5.mongodb.net/
 
 
 async function hi() {
-MongoClient.connect(url,{ useUnifiedTopology: true }, (err, client) => {
+await MongoClient.connect(url,{ useUnifiedTopology: true }, (err, client) => {
     // /READ 
     const db = client.db("test");
     let cursor = await db.collection('inventory').find({});
@@ -25,4 +25,4 @@ MongoClient.connect(url,{ useUnifiedTopology: true }, (err, client) => {
 }
 
 
-hi
+hi()
