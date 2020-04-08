@@ -1,27 +1,28 @@
 const mongoose = require('mongoose');
 
-const URL = 'mongodb+srv://onceonceonce11:onceonceonce11@nemo-rkcm5.mongodb.net/dev_api?retryWrites=true&w=majority';
+const URL = 'mongodb+srv://onceonceonce11:onceonceonce11@nemo-rkcm5.mongodb.net/test?retryWrites=true&w=majority';
+// const URL = 'mongodb+srv://onceonceonce11:onceonceonce11@nemo-rkcm5.mongodb.net/inventory?retryWrites=true&w=majority';
 mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
-let schema = new mongoose.Schema({
-    item: String,
-    quantity: Number,
+const schema = new mongoose.Schema({
+    item: { type: String, required: true },
+    quantity: { type: Number, required: true },
     size: {
-        height: Number,
-        width: Number,
-        unit: String
+        height: { type: Number, required: true },
+        width: { type: Number, required: true },
+        unit: { type: String, required: true }
     },
-    lastChecked: Date, 
-    onStock: Boolean
-});
+    lastChecked: { type: Date, required: true }, 
+    onStock: { type: Boolean, required: true }
+}, { versionKey: false });
+
+const InventoryItem = mongoose.model('Inventory', schema, 'items');
 
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console,'connection error'))
 db.once('open', ()=> {
     console.log("WE'RE CONNECTED");
-    
-    let InventoryItem = mongoose.model('Inventory', schema, 'inventory');
 
     let Dummy = new InventoryItem({
         item: 'Potato Chips',
@@ -31,6 +32,7 @@ db.once('open', ()=> {
             width: 17,
             unit: 'cm'
         },
+        lastChecked: Date.now(),
         onStock: true
     });
 
