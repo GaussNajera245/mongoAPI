@@ -1,0 +1,64 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// app.post('/', (req, res) => {
+//     const InventoryItem = mongoose.model('Inventory', schema, 'items');
+//     const db = mongoose.connection;
+//     db.on('error', console.error.bind(console,'connection error'))
+//     db.once('open', ()=> {
+//         console.log("WE'RE CONNECTED");
+
+//         let Dummy = new InventoryItem({ ...req.body });
+
+//         Dummy.save()
+//             .then( () => {
+//                 console.log('Correctly saved;)')
+//                 res.send('OK') 
+//             } )
+//             .catch( (e) => {
+//                 console.log('Something went wrong:(', e)  
+//                 res.send('NOT OK')
+//             })
+//     });
+// })
+
+// app.get('/hi', (req, res)=> {
+//     console.log(req.body)
+// })

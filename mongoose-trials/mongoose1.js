@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
         width: { type: Number, required: true },
         unit: { type: String, required: true }
     },
-    lastChecked: { type: Date, required: true }, 
+    lastChecked: { type: Date, required: true, default: Date.now()}, 
     onStock: { type: Boolean, required: true }
 }, { versionKey: false });
 
@@ -25,8 +25,8 @@ db.once('open', ()=> {
     console.log("WE'RE CONNECTED");
 
     let Dummy = new InventoryItem({
-        item: 'Potato Chips',
-        quantity: 6,
+        item:'5',
+        quantity: true,
         size:{
             height: 30,
             width: 17,
