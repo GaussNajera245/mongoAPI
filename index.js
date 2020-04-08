@@ -28,7 +28,6 @@ app.get('/', (req, res) => {
         const cursor = db.collection('items').find({}).toArray( 
             function(err, result) {
                 if (err) throw err;
-                console.log(result);
                 res.send(result)
                 client.close();
             }
@@ -49,6 +48,17 @@ app.post('/', (req, res) => {
         Dummy.save()
             .then( () => res.send({ uploaded: true, ...req.body}) )
             .catch( (err) => res.send({ uploaded: false, ...err }) )
+    });
+});
+
+app.delete('/', (req, res) => {
+    MongoClient.connect( URL, { useUnifiedTopology: true }, async (err, client) => {
+        assert.equal(null, err);
+        
+        const db = client.db('inventory');
+        await db.collection('items').deleteOne({ ...req.body });
+        client.close();
+        res.json({method: 'DELETE'})
     });
 });
 
